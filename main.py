@@ -44,3 +44,10 @@ def actualizar_desde_excel():
 def recibir_code(request: Request):
     code = request.query_params.get("code")
     return {"authorization_code": code}
+
+@app.post("/notificaciones")
+async def recibir_notificacion(request: Request):
+    body = await request.json()
+    print("📬 Notificación recibida:", body)
+    return {"status": "ok"}
+
