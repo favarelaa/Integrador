@@ -7,8 +7,11 @@
 #pip install fastapi uvicorn
 #uvicorn main:app --reload --port 8001
 from fastapi import FastAPI, Request
+from pyngrok import ngrok
+import requests
 import pandas as pd
 from meli import actualizar_precio, actualizar_stock
+from dotenv import load_dotenv
 
 app = FastAPI()
 
