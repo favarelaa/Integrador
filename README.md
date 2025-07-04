@@ -8,7 +8,8 @@ Este proyecto realiza integraciones con la API de MercadoLibre, Falabella, Riple
 
 ## Requisitos
 - Python 3
-- Requests (u otra librería que uses)
+- Requests
+- Pandas
 
 ## Uso
 1. Clona este repositorio.
