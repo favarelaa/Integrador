@@ -6,6 +6,8 @@
 #cd ..
 #pip install fastapi uvicorn
 #uvicorn main:app --reload --port 8001
+#https://auth.mercadolibre.com/authorization?response_type=code&client_id=2659704398649482&redirect_uri=https://easyadmin-0437.onrender.com/callback
+
 from fastapi import FastAPI, Request
 import requests
 import pandas as pd
@@ -48,7 +50,7 @@ def read_root():
 # ✅ Ver detalles de la app en MELI
 @app.get("/ver-app")
 def ver_datos_app():
-    ACCESS_TOKEN = os.getenv("ACCESS_TOKEN") or 'TU_ACCESS_TOKEN_AQUI'
+    ACCESS_TOKEN = "APP_USR-2659704398649482-070518-c9b2f1bf33aec3092c4f336ecaa2d418-816130048"
     APP_ID = "2659704398649482"
     url = f"https://api.mercadolibre.com/applications/{APP_ID}"
     headers = {
@@ -60,6 +62,9 @@ def ver_datos_app():
         "status": response.status_code,
         "data": response.json()
     }
+
+
+
 
 # ✅ Actualización desde archivo Excel
 @app.post("/actualizar-desde-excel")
@@ -89,6 +94,7 @@ def recibir_code(request: Request):
     code = request.query_params.get("code")
     print("📥 Authorization Code recibido:", code)
     return {"authorization_code": code}
+
 
 # ✅ Notificaciones desde MELI
 @app.post("/notificaciones")
@@ -120,6 +126,9 @@ def refresh_token():
         "status": response.status_code,
         "data": response.json()
     }
+
+
+
 
 
 @app.get("/mis-productos")
