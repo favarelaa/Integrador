@@ -12,6 +12,7 @@ import pandas as pd
 from meli import actualizar_precio, actualizar_stock  # Asegúrate de tener este archivo
 import os
 from dotenv import load_dotenv
+from fastapi import Query
 load_dotenv()
 
 
@@ -119,4 +120,18 @@ def refresh_token():
         "status": response.status_code,
         "data": response.json()
     }
+
+
+@app.get("/mis-productos")
+def ver_productos():
+    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
+    user_id = 816130048
+    url = f"https://api.mercadolibre.com/users/{user_id}/items/search"
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+
+    response = requests.get(url, headers=headers)
+    return response.json()
+
 
