@@ -17,8 +17,8 @@ app = FastAPI()
 @app.get("/obtener-token")
 def obtener_token(code: str):
     client_id = "2659704398649482"
-    client_secret = os.getenv("CLIENT_SECRET") or "TU_CLIENT_SECRET"
-    redirect_uri = "https://easyadmin-0437.onrender.com/callback"  # tu URI registrada
+    client_secret = "KiAwTWyyb8S2xcZ4PsJVZDJ4dPd7B3fi"
+    redirect_uri = "https://easyadmin-0437.onrender.com/callback" 
 
     url = "https://api.mercadolibre.com/oauth/token"
     payload = {
