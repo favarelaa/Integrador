@@ -95,3 +95,28 @@ async def recibir_notificacion(request: Request):
     body = await request.json()
     print("📬 Notificación recibida:", body)
     return {"status": "ok"}
+
+
+
+@app.get("/refresh-token")
+def refresh_token():
+    client_id = "2659704398649482"
+    client_secret = os.getenv("CLIENT_SECRET")
+    refresh_token = "TG-6869954d228c0b00017d4db0-816130048"
+
+    url = "https://api.mercadolibre.com/oauth/token"
+    payload = {
+        "grant_type": "refresh_token",
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "refresh_token": refresh_token
+    }
+
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    response = requests.post(url, data=payload, headers=headers)
+    
+    return {
+        "status": response.status_code,
+        "data": response.json()
+    }
+
