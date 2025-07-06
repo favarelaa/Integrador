@@ -55,7 +55,7 @@ def obtener_token(code: str):
 def refresh_token():
     client_id = "2659704398649482"
     client_secret = os.getenv("CLIENT_SECRET")
-    refresh_token = "TG-6869954d228c0b00017d4db0-816130048"
+    refresh_token = "TG-6869ef49f538180001c8fe99-816130048"
 
     url = "https://api.mercadolibre.com/oauth/token"
     payload = {
@@ -81,7 +81,7 @@ def read_root():
 # ✅ Ver detalles de la app en MELI
 @app.get("/ver-app")
 def ver_datos_app():
-    ACCESS_TOKEN = "APP_USR-2659704398649482-070518-c9b2f1bf33aec3092c4f336ecaa2d418-816130048"
+    ACCESS_TOKEN = "APP_USR-2659704398649482-070523-3750f6563d9cb97a06eb3070da98ce9a-816130048"
     APP_ID = "2659704398649482"
     url = f"https://api.mercadolibre.com/applications/{APP_ID}"
     headers = {
@@ -130,7 +130,7 @@ async def recibir_notificacion(request: Request):
 
 @app.get("/mis-productos-simple")
 def ver_productos():
-    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
+    access_token = "APP_USR-2659704398649482-070523-3750f6563d9cb97a06eb3070da98ce9a-816130048"
     user_id = 816130048
     url = f"https://api.mercadolibre.com/users/{user_id}/items/search"
     headers = {
@@ -144,7 +144,7 @@ def ver_productos():
 
 @app.get("/mis-productos")
 def ver_productos():
-    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
+    access_token = "APP_USR-2659704398649482-070523-3750f6563d9cb97a06eb3070da98ce9a-816130048"
     user_id = 816130048
 
     # Paso 1: Obtener lista de items del vendedor
