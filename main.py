@@ -144,7 +144,7 @@ def ver_productos():
 
 @app.get("/mis-productos")
 def ver_productos():
-    access_token = "TU_ACCESS_TOKEN"
+    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
     user_id = 816130048
 
     # Paso 1: Obtener lista de items del vendedor
