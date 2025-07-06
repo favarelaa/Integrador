@@ -65,7 +65,6 @@ def ver_datos_app():
 
 
 
-
 # ✅ Actualización desde archivo Excel
 @app.post("/actualizar-desde-excel")
 def actualizar_desde_excel():
@@ -93,7 +92,7 @@ def actualizar_desde_excel():
 def recibir_code(request: Request):
     code = request.query_params.get("code")
     print("📥 Authorization Code recibido:", code)
-    return {"authorization_code": code}
+    return {"authorization_code_XD": code}
 
 
 # ✅ Notificaciones desde MELI
@@ -126,9 +125,6 @@ def refresh_token():
         "status": response.status_code,
         "data": response.json()
     }
-
-
-
 
 
 @app.get("/mis-productos")
