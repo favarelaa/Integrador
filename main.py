@@ -142,7 +142,44 @@ def ver_productos():
 
 
 
+
+@app.get("/mis-productos")
+def ver_productos():
+    access_token = "APP_USR-2659704398649482-070523-3750f6563d9cb97a06eb3070da98ce9a-816130048"
+    user_id = 816130048
+
+    # Paso 1: Obtener lista de items del vendedor
+    url_items = f"https://api.mercadolibre.com/users/{user_id}/items/search"
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response = requests.get(url_items, headers=headers)
+    item_ids = response.json().get("results", [])
+
+    productos = []
+
+    # Paso 2: Obtener detalle de cada item
+    for item_id in item_ids:
+        url_detalle = f"https://api.mercadolibre.com/items/{item_id}"
+        r = requests.get(url_detalle, headers=headers)
+
+        if r.status_code == 200:
+            data = r.json()
+            producto = {
+                "item_id": data.get("id"),
+                "sku": data.get("seller_custom_field"),  # Esto es el SKU
+                "titulo": data.get("title"),
+                "precio": data.get("price"),
+                "stock": data.get("available_quantity")
+            }
+            productos.append(producto)
+
+    return productos
+
 import pandas as pd
+
+from fastapi.responses import StreamingResponse
+import pandas as pd
+import io
+import requests
 
 @app.get("/mis-productos/excel")
 def descargar_productos_excel():
@@ -169,9 +206,15 @@ def descargar_productos_excel():
                 "Stock": data.get("available_quantity")
             })
 
-    # Crear DataFrame y exportar a Excel
     df = pd.DataFrame(productos)
-    file_path = "productos_meli.xlsx"
-    df.to_excel(file_path, index=False)
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        df.to_excel(writer, index=False, sheet_name="Productos")
 
-    return {"mensaje": "Archivo Excel generado correctamente", "archivo": file_path}
+    output.seek(0)
+
+    return StreamingResponse(
+        output,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment; filename=productos_meli.xlsx"}
+    )
