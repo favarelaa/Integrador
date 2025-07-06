@@ -128,17 +128,17 @@ async def recibir_notificacion(request: Request):
     return {"status": "ok"}
 
 
-@app.get("/mis-productos")
-def ver_productos():
-    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
-    user_id = 816130048
-    url = f"https://api.mercadolibre.com/users/{user_id}/items/search"
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
+#@app.get("/mis-productos")
+#def ver_productos():
+#    access_token = "APP_USR-2659704398649482-070517-e743555e9d80b09fb703a0f7118e2a07-816130048"
+#    user_id = 816130048
+#    url = f"https://api.mercadolibre.com/users/{user_id}/items/search"
+#    headers = {
+#        "Authorization": f"Bearer {access_token}"
+#    }
 
-    response = requests.get(url, headers=headers)
-    return response.json()
+#    response = requests.get(url, headers=headers)
+#    return response.json()
 
 
 
